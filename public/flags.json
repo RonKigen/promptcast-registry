@@ -1,0 +1,31 @@
+{
+  "version": "1.0.0",
+  "rollout": {
+    "responseHarvesting": 1.0,
+    "smartTabPooling": 1.0,
+    "contextMenu": 1.0,
+    "omniboxIntegration": 1.0
+  },
+  "force_refresh": false,
+  "maintenance_mode": false,
+  "announcements": {
+    "message": "",
+    "severity": "info",
+    "link": ""
+  },
+  "experimental": {
+    "multiStepChaining": 0.0,
+    "aiResponseDiff": 0.1,
+    "workflowBuilder": 0.0
+  },
+  "limits": {
+    "max_platforms_per_injection": 5,
+    "max_prompt_length": 10000,
+    "max_history_items": 20
+  },
+  "notes": {
+    "rollout": "1.0 = 100% of users, 0.5 = 50% of users, 0.0 = disabled",
+    "force_refresh": "Set to true to force all clients to re-fetch selectors immediately",
+    "maintenance_mode": "Set to true to disable all injections with a maintenance message"
+  }
+}

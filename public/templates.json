@@ -1,0 +1,146 @@
+{
+  "version": "1.0.0",
+  "categories": [
+    {
+      "name": "Productivity",
+      "templates": [
+        {
+          "id": "summarize-text",
+          "title": "Summarize Long Text",
+          "prompt": "Please summarize the following text in a concise manner:\n\n{{selection}}",
+          "description": "Condense lengthy content into key points",
+          "platforms": ["chatgpt", "claude", "gemini"]
+        },
+        {
+          "id": "improve-writing",
+          "title": "Improve Writing",
+          "prompt": "Please improve the following text for clarity, grammar, and style:\n\n{{selection}}",
+          "description": "Enhance your writing quality",
+          "platforms": ["chatgpt", "claude"]
+        },
+        {
+          "id": "translate",
+          "title": "Translate Text",
+          "prompt": "Please translate the following text to [TARGET_LANGUAGE]:\n\n{{selection}}",
+          "description": "Translate content to any language",
+          "platforms": ["chatgpt", "gemini"]
+        }
+      ]
+    },
+    {
+      "name": "Development",
+      "templates": [
+        {
+          "id": "debug-code",
+          "title": "Debug Code",
+          "prompt": "I have the following code that's not working as expected. Can you help me identify and fix the bug?\n\n```\n{{selection}}\n```",
+          "description": "Find and fix code issues",
+          "platforms": ["chatgpt", "claude"]
+        },
+        {
+          "id": "explain-code",
+          "title": "Explain Code",
+          "prompt": "Please explain what the following code does, line by line:\n\n```\n{{selection}}\n```",
+          "description": "Understand complex code",
+          "platforms": ["chatgpt", "claude"]
+        },
+        {
+          "id": "optimize-code",
+          "title": "Optimize Code",
+          "prompt": "Can you suggest optimizations for this code in terms of performance and readability?\n\n```\n{{selection}}\n```",
+          "description": "Make code more efficient",
+          "platforms": ["chatgpt", "claude"]
+        }
+      ]
+    },
+    {
+      "name": "Research",
+      "templates": [
+        {
+          "id": "research-topic",
+          "title": "Research Topic",
+          "prompt": "I'd like to learn about {{topic}}. Please provide a comprehensive overview including key concepts, current trends, and important considerations.",
+          "description": "Deep dive into any subject",
+          "platforms": ["perplexity", "gemini", "claude"]
+        },
+        {
+          "id": "compare-options",
+          "title": "Compare Options",
+          "prompt": "Please compare the following options and provide pros/cons for each:\n\n{{selection}}",
+          "description": "Make informed decisions",
+          "platforms": ["claude", "chatgpt"]
+        },
+        {
+          "id": "fact-check",
+          "title": "Fact Check",
+          "prompt": "Can you fact-check the following claim and provide sources?\n\n{{selection}}",
+          "description": "Verify information accuracy",
+          "platforms": ["perplexity", "gemini"]
+        }
+      ]
+    },
+    {
+      "name": "Creative",
+      "templates": [
+        {
+          "id": "brainstorm-ideas",
+          "title": "Brainstorm Ideas",
+          "prompt": "I need creative ideas for: {{topic}}. Please generate at least 10 unique and innovative suggestions.",
+          "description": "Generate creative concepts",
+          "platforms": ["chatgpt", "claude", "gemini"]
+        },
+        {
+          "id": "write-marketing-copy",
+          "title": "Marketing Copy",
+          "prompt": "Write compelling marketing copy for:\n\nProduct/Service: {{selection}}\nTarget Audience: [SPECIFY]\nTone: [SPECIFY]",
+          "description": "Create persuasive content",
+          "platforms": ["chatgpt", "claude"]
+        },
+        {
+          "id": "generate-outline",
+          "title": "Content Outline",
+          "prompt": "Create a detailed outline for an article/blog post about: {{topic}}",
+          "description": "Structure your content",
+          "platforms": ["chatgpt", "claude"]
+        }
+      ]
+    },
+    {
+      "name": "Analysis",
+      "templates": [
+        {
+          "id": "analyze-data",
+          "title": "Analyze Data",
+          "prompt": "Please analyze the following data and provide insights:\n\n{{selection}}",
+          "description": "Extract meaningful insights",
+          "platforms": ["chatgpt", "claude", "gemini"]
+        },
+        {
+          "id": "swot-analysis",
+          "title": "SWOT Analysis",
+          "prompt": "Perform a SWOT analysis (Strengths, Weaknesses, Opportunities, Threats) for:\n\n{{selection}}",
+          "description": "Strategic business analysis",
+          "platforms": ["claude", "chatgpt"]
+        },
+        {
+          "id": "sentiment-analysis",
+          "title": "Sentiment Analysis",
+          "prompt": "Analyze the sentiment and tone of the following text:\n\n{{selection}}",
+          "description": "Understand emotional tone",
+          "platforms": ["chatgpt", "claude"]
+        }
+      ]
+    }
+  ],
+  "variables": {
+    "{{selection}}": "Currently selected text on the page",
+    "{{page.title}}": "Current page title",
+    "{{page.url}}": "Current page URL",
+    "{{topic}}": "User-defined topic (will prompt for input)"
+  },
+  "notes": {
+    "usage": "Templates can be imported into PromptCast for one-click prompt generation",
+    "customization": "Users can create custom templates and share them via GitHub Gists",
+    "community": "Submit your templates via PR to help the community"
+  }
+}

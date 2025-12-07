@@ -1,0 +1,162 @@
+{
+  "version": "1.0.1",
+  "updated_at": "2025-12-08T00:00:00Z",
+  "tested": true,
+  "description": "Selectors tested against live platforms on 2025-12-08. A/B test variations included.",
+  "platforms": {
+    "kimi": {
+      "url": "https://kimi.ai/chat",
+      "selectors": {
+        "input": [
+          "#chat-input",
+          "textarea[placeholder*='输入']",
+          "textarea[placeholder*='Ask']",
+          "div[contenteditable='true'][role='textbox']",
+          "textarea.ant-input",
+          "textarea[class*='Input']",
+          "div[data-slate-editor='true']"
+        ],
+        "send": [
+          "button[type='submit']",
+          "button[aria-label*='Send']",
+          "button[aria-label*='发送']",
+          "button:has(svg):not([disabled])",
+          "button[class*='SendButton']",
+          "div[role='button'][aria-label*='Send']"
+        ]
+      },
+      "signin_detect": [
+        "button:contains('登录')",
+        "button:contains('Sign In')",
+        "a[href*='/login']",
+        "div[class*='Login']",
+        "button:contains('立即登录')"
+      ],
+      "limit_detect": [
+        "div:contains('使用次数已达上限')",
+        "div:contains('limit')",
+        "div:contains('达到上限')",
+        "div:contains('请稍后再试')",
+        "span:contains('Quota exceeded')"
+      ]
+    },
+    "chatgpt": {
+      "url": "https://chat.openai.com/",
+      "tested_date": "2025-12-08",
+      "notes": "ChatGPT A/B tests #prompt-textarea vs data-id. Both included.",
+      "selectors": {
+        "input": [
+          "#prompt-textarea",
+          "textarea[data-id='root']",
+          "textarea[placeholder*='Message']",
+          "textarea[id^='prompt-textarea']",
+          "div[contenteditable='true'][data-id='root']",
+          "textarea.m-0",
+          "div[contenteditable='true'][role='textbox']"
+        ],
+        "send": [
+          "button[data-testid='send-button']",
+          "button[data-testid='fruitjuice-send-button']",
+          "button[aria-label='Send message']",
+          "button:has(svg[data-icon='arrow-up'])",
+          "button:has(path[d*='M.5 1.163A1'])",
+          "button[class*='bottom-'][class*='right-']"
+        ]
+      },
+      "signin_detect": [
+        "button:contains('Log in')",
+        "button:contains('Sign up')",
+        "a[href*='/auth/login']",
+        "div:contains('Welcome back')",
+        "h1:contains('Welcome to ChatGPT')"
+      ],
+      "limit_detect": [
+        "div:contains('Too many requests')",
+        "div:contains('rate limit')",
+        "div:contains('try again')",
+        "div:contains('You've reached')",
+        "span:contains('Please try again later')"
+      ]
+    },
+    "gemini": {
+      "url": "https://gemini.google.com/app",
+      "selectors": {
+        "input": [
+          "rich-textarea",
+          "div[contenteditable='true']",
+          "textarea[aria-label*='prompt']",
+          "div.ql-editor"
+        ],
+        "send": [
+          "button[aria-label*='Send']",
+          "button[mattooltip*='Send']",
+          "button:has(mat-icon:contains('send'))",
+          "button.send-button"
+        ]
+      },
+      "signin_detect": [
+        "button:contains('Sign in')",
+        "a[href*='accounts.google.com']"
+      ],
+      "limit_detect": [
+        "div:contains('too many requests')",
+        "div:contains('quota exceeded')",
+        "div:contains('try again')"
+      ]
+    },
+    "claude": {
+      "url": "https://claude.ai/",
+      "selectors": {
+        "input": [
+          "div[contenteditable='true'][placeholder*='Talk']",
+          "div[contenteditable='true'][role='textbox']",
+          "textarea[placeholder*='Message']",
+          "div.ProseMirror"
+        ],
+        "send": [
+          "button[aria-label='Send Message']",
+          "button[aria-label='Send']",
+          "button:has(svg[class*='send'])"
+        ]
+      },
+      "signin_detect": [
+        "button:contains('Sign in')",
+        "button:contains('Log in')",
+        "a[href*='login']"
+      ],
+      "limit_detect": [
+        "div:contains('rate limit')",
+        "div:contains('usage limit')",
+        "div:contains('try again')"
+      ]
+    },
+    "perplexity": {
+      "url": "https://www.perplexity.ai/",
+      "selectors": {
+        "input": [
+          "textarea[placeholder*='Ask']",
+          "textarea.search-input",
+          "div[contenteditable='true']"
+        ],
+        "send": [
+          "button[aria-label='Submit']",
+          "button[type='submit']",
+          "button:has(svg[class*='arrow'])"
+        ]
+      },
+      "signin_detect": [
+        "button:contains('Sign in')",
+        "button:contains('Log in')"
+      ],
+      "limit_detect": [
+        "div:contains('limit reached')",
+        "div:contains('upgrade')"
+      ]
+    }
+  },
+  "notes": {
+    "update_frequency": "Check weekly or when platforms update their UI",
+    "fallback_strategy": "Extension tries each selector in order with 100ms delays",
+    "community_contributions": "Submit PRs with updated selectors to help all users"
+  }
+}
