@@ -1,28 +1,25 @@
 {
-  "version": "1.0.2",
-  "updated_at": "2025-12-08T03:20:00Z",
+  "version": "1.0.3",
+  "updated_at": "2025-12-08T12:25:00Z",
   "tested": true,
-  "description": "Fixed :contains() selectors - using native CSS only. Tested 2025-12-08.",
+  "description": "Fixed false sign-in detection, prioritize visible inputs with :not([aria-hidden])",
   "platforms": {
     "kimi": {
       "url": "https://kimi.ai/chat",
       "selectors": {
         "input": [
+          "textarea:not([aria-hidden='true'])",
+          "div[contenteditable='true']:not([aria-hidden='true'])",
+          "[role='textbox']:not([aria-hidden='true'])",
           "textarea",
           "input[type='text']",
-          "div[contenteditable='true']",
-          "[role='textbox']",
-          "[placeholder*='Ask']",
-          "[placeholder*='输入']",
-          "#chat-input",
-          "textarea.ant-input"
+          "div[contenteditable='true']"
         ],
         "send": [
-          "button[type='submit']",
-          "button:has(svg)",
-          "button[aria-label*='send' i]",
-          "button[aria-label*='发送']",
-          "button:not([disabled])"
+          "button[type='submit']:not([disabled])",
+          "button[aria-label*='send' i]:not([disabled])",
+          "button[aria-label*='发送']:not([disabled])",
+          "button:has(svg):not([disabled])"
         ]
       },
       "signin_detect": [
@@ -85,8 +82,8 @@
         ]
       },
       "signin_detect": [
-        "a[href*='accounts.google.com']",
-        "button[aria-label*='Sign in' i]"
+        "button:has-text('Sign in')",
+        "a[href*='/signin']"
       ],
       "limit_detect": [
         "div[role='alert']",
@@ -97,15 +94,17 @@
       "url": "https://claude.ai/",
       "selectors": {
         "input": [
-          "div[contenteditable='true'][placeholder*='Talk']",
-          "div[contenteditable='true'][role='textbox']",
-          "textarea[placeholder*='Message']",
-          "div.ProseMirror"
+          "div.ProseMirror",
+          "div[contenteditable='true']:not([aria-hidden='true'])",
+          "textarea:not([aria-hidden='true'])",
+          "[role='textbox']:not([aria-hidden='true'])",
+          "fieldset textarea",
+          "fieldset div[contenteditable='true']"
         ],
         "send": [
-          "button[aria-label='Send Message']",
-          "button[aria-label='Send']",
-          "button:has(svg[class*='send'])"
+          "button[aria-label*='Send' i]:not([disabled])",
+          "button[type='submit']:not([disabled])",
+          "button:has(svg):not([disabled])"
         ]
       },
       "signin_detect": [

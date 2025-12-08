@@ -286,16 +286,15 @@ async function launchAndInject(platforms, prompt, options = {}) {
   };
 }
 
-async function waitForTabReady(tabId, maxWait = 10000) {
+async function waitForTabReady(tabId, maxWait = 15000) {
   const startTime = Date.now();
   
+  // First: Wait for page load
   while (Date.now() - startTime < maxWait) {
     try {
       const tab = await chrome.tabs.get(tabId);
       if (tab.status === 'complete') {
-        // Additional wait for dynamic content
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        return true;
+        break;
       }
     } catch (error) {
       throw new Error('Tab was closed');
@@ -303,7 +302,12 @@ async function waitForTabReady(tabId, maxWait = 10000) {
     await new Promise(resolve => setTimeout(resolve, 500));
   }
   
-  throw new Error('Tab load timeout');
+  // Second: Wait for SPA hydration (React/Vue rendering)
+  // Give SPAs 3-5 seconds to render input elements
+  await new Promise(resolve => setTimeout(resolve, 4000));
+  
+  console.log(`[PromptCast] Tab ${tabId} ready after ${Date.now() - startTime}ms`);
+  return true;
 }
 
 async function storeInjectionResult(injectionId, platformId, result) {

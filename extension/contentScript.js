@@ -185,7 +185,7 @@ async function detectPageState(selectors) {
   };
 
   // Check for sign-in requirement
-  if (selectors.signin_detect) {
+  if (selectors.signin_detect && false) { // DISABLED: Too many false positives
     showDebugOverlay(`🔍 Checking for sign-in...`, 'info');
     try {
       const signInElement = await findElement(selectors.signin_detect, 2000);
@@ -220,15 +220,15 @@ async function detectPageState(selectors) {
 
   // Check if input is available
   try {
-    showDebugOverlay(`🔍 Looking for input element (timeout: 8s)...`, 'info');
-    const inputElement = await findElement(selectors.input, 8000);
+    showDebugOverlay(`🔍 Looking for input element (timeout: 12s)...`, 'info');
+    const inputElement = await findElement(selectors.input, 12000);
     if (inputElement) {
       showDebugOverlay(`✅ Page is ready!`, 'success');
       state.ready = true;
       return state;
     }
   } catch (error) {
-    showDebugOverlay(`💀 Input check failed after 8s`, 'error');
+    showDebugOverlay(`💀 Input check failed after 12s`, 'error');
     state.error = 'Input element not found';
     return state;
   }
