@@ -8,21 +8,21 @@
       "url": "https://kimi.ai/chat",
       "selectors": {
         "input": [
+          "textarea",
+          "input[type='text']",
+          "div[contenteditable='true']",
+          "[role='textbox']",
+          "[placeholder*='Ask']",
+          "[placeholder*='输入']",
           "#chat-input",
-          "textarea[placeholder*='输入']",
-          "textarea[placeholder*='Ask']",
-          "div[contenteditable='true'][role='textbox']",
-          "textarea.ant-input",
-          "textarea[class*='Input']",
-          "div[data-slate-editor='true']"
+          "textarea.ant-input"
         ],
         "send": [
           "button[type='submit']",
-          "button[aria-label*='Send']",
+          "button:has(svg)",
+          "button[aria-label*='send' i]",
           "button[aria-label*='发送']",
-          "button:has(svg):not([disabled])",
-          "button[class*='SendButton']",
-          "div[role='button'][aria-label*='Send']"
+          "button:not([disabled])"
         ]
       },
       "signin_detect": [

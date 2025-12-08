@@ -240,11 +240,17 @@ async function launchAndInject(platforms, prompt, options = {}) {
       });
 
       // Send injection command
+      const platformConfig = selectorsData.platforms[platformId];
       const response = await chrome.tabs.sendMessage(tabId, {
         action: 'injectPrompt',
         prompt,
         platform: platformId,
-        selectors: selectorsData.platforms[platformId],
+        selectors: {
+          input: platformConfig.selectors.input,
+          send: platformConfig.selectors.send,
+          signin_detect: platformConfig.signin_detect,
+          limit_detect: platformConfig.limit_detect
+        },
         options
       });
 
