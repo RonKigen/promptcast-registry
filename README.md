@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # PromptCast 🚀
 
 **Universal AI Orchestration Layer** - Send prompts to multiple AI platforms simultaneously, harvest responses, and manage everything from a unified dashboard.
@@ -286,3 +287,6 @@ MIT License - see [LICENSE](LICENSE)
 **Built with ❤️ for the AI power-user community**
 
 *No servers, no costs, no compromises on privacy.*
+=======
+# promptcast-registry
+>>>>>>> 0120768f38948f8c686fed8582fb5751a0c5775d

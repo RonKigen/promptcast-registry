@@ -1,0 +1,7 @@
+name = "promptcast-telemetry"
+main = "worker.js"
+compatibility_date = "2024-12-08"
+
+[[kv_namespaces]]
+binding = "COUNTER"
+id = "0e0971050805422a8c0c7c389d5052db"

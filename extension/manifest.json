@@ -1,0 +1,94 @@
+{
+  "manifest_version": 3,
+  "name": "PromptCast",
+  "version": "1.0.0",
+  "description": "Universal AI orchestration layer - send prompts to multiple AI platforms simultaneously",
+  
+  "icons": {
+    "16": "icons/prompt cast.png",
+    "48": "icons/prompt cast.png",
+    "128": "icons/prompt cast.png"
+  },
+  
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/prompt cast.png",
+      "48": "icons/prompt cast.png",
+      "128": "icons/prompt cast.png"
+    },
+    "default_title": "PromptCast - Multi-AI Launcher"
+  },
+  
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage",
+    "alarms",
+    "contextMenus",
+    "tabs"
+  ],
+  
+  "host_permissions": [
+    "https://kimi.ai/*",
+    "https://kimi.moonshot.cn/*",
+    "https://www.kimi.com/*",
+    "https://chat.openai.com/*",
+    "https://chatgpt.com/*",
+    "https://gemini.google.com/*",
+    "https://claude.ai/*",
+    "https://www.perplexity.ai/*",
+    "https://chat.deepseek.com/*",
+    "https://www.deepseek.com/*",
+    "https://groq.com/*",
+    "https://console.groq.com/*",
+    "https://chat.groq.com/*",
+    "https://chat.mistral.ai/*",
+    "https://pi.ai/*",
+    "https://huggingface.co/chat/*",
+    "https://openrouter.ai/chat/*",
+    "https://poe.com/*",
+    "https://cline.bot/*",
+    "https://www.cursor.com/*",
+    "https://www.blackbox.ai/*",
+    "https://www.phind.com/*",
+    "https://replit.com/*",
+    "https://ideogram.ai/*",
+    "https://www.midjourney.com/*",
+    "https://leonardo.ai/*",
+    "https://you.com/*",
+    "https://andisearch.com/*"
+  ],
+  
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; connect-src https://*.github.io https://*.githubusercontent.com https://*.workers.dev"
+  },
+  
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+A",
+        "mac": "Command+Shift+A"
+      },
+      "description": "Open PromptCast"
+    },
+    "send_selection": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Q",
+        "mac": "Command+Shift+Q"
+      },
+      "description": "Send selected text to AIs"
+    }
+  },
+  
+  "omnibox": {
+    "keyword": "ai"
+  },
+  
+  "privacy_policy": "https://github.com/RonKigen/promptcast-registry/blob/main/PRIVACY.md"
+}

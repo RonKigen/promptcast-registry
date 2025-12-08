@@ -1,8 +1,8 @@
 {
-  "version": "1.0.1",
-  "updated_at": "2025-12-08T00:00:00Z",
+  "version": "1.0.2",
+  "updated_at": "2025-12-08T03:20:00Z",
   "tested": true,
-  "description": "Selectors tested against live platforms on 2025-12-08. A/B test variations included.",
+  "description": "Fixed :contains() selectors - using native CSS only. Tested 2025-12-08.",
   "platforms": {
     "kimi": {
       "url": "https://kimi.ai/chat",
@@ -26,18 +26,13 @@
         ]
       },
       "signin_detect": [
-        "button:contains('登录')",
-        "button:contains('Sign In')",
         "a[href*='/login']",
-        "div[class*='Login']",
-        "button:contains('立即登录')"
+        "button[class*='Login']"
       ],
       "limit_detect": [
-        "div:contains('使用次数已达上限')",
-        "div:contains('limit')",
-        "div:contains('达到上限')",
-        "div:contains('请稍后再试')",
-        "span:contains('Quota exceeded')"
+        "div[role='alert']",
+        "div[class*='error']",
+        "div[class*='limit']"
       ]
     },
     "chatgpt": {
@@ -64,18 +59,13 @@
         ]
       },
       "signin_detect": [
-        "button:contains('Log in')",
-        "button:contains('Sign up')",
         "a[href*='/auth/login']",
-        "div:contains('Welcome back')",
-        "h1:contains('Welcome to ChatGPT')"
+        "button[class*='login' i]"
       ],
       "limit_detect": [
-        "div:contains('Too many requests')",
-        "div:contains('rate limit')",
-        "div:contains('try again')",
-        "div:contains('You've reached')",
-        "span:contains('Please try again later')"
+        "div[role='alert']",
+        "div[class*='error' i]",
+        "div[class*='limit' i]"
       ]
     },
     "gemini": {
@@ -95,13 +85,12 @@
         ]
       },
       "signin_detect": [
-        "button:contains('Sign in')",
-        "a[href*='accounts.google.com']"
+        "a[href*='accounts.google.com']",
+        "button[aria-label*='Sign in' i]"
       ],
       "limit_detect": [
-        "div:contains('too many requests')",
-        "div:contains('quota exceeded')",
-        "div:contains('try again')"
+        "div[role='alert']",
+        "div[class*='error' i]"
       ]
     },
     "claude": {
@@ -120,14 +109,12 @@
         ]
       },
       "signin_detect": [
-        "button:contains('Sign in')",
-        "button:contains('Log in')",
-        "a[href*='login']"
+        "a[href*='login']",
+        "button[class*='login' i]"
       ],
       "limit_detect": [
-        "div:contains('rate limit')",
-        "div:contains('usage limit')",
-        "div:contains('try again')"
+        "div[role='alert']",
+        "div[class*='error' i]"
       ]
     },
     "perplexity": {
@@ -145,12 +132,12 @@
         ]
       },
       "signin_detect": [
-        "button:contains('Sign in')",
-        "button:contains('Log in')"
+        "a[href*='login']",
+        "button[class*='login' i]"
       ],
       "limit_detect": [
-        "div:contains('limit reached')",
-        "div:contains('upgrade')"
+        "div[role='alert']",
+        "div[class*='error' i]"
       ]
     }
   },
