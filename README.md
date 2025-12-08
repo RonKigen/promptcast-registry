@@ -95,8 +95,8 @@ PromptCast **IS**:
 
 1. **Clone or Download**
    ```bash
-   git clone https://github.com/YOUR_USERNAME/promptcast.git
-   cd promptcast
+   git clone https://github.com/RonKigen/promptcast-registry.git
+   cd promptcast-registry
    ```
 
 2. **Load Extension**
@@ -278,8 +278,8 @@ MIT License - see [LICENSE](LICENSE)
 
 ## 📞 Support
 
-- **Issues**: [GitHub Issues](https://github.com/YOUR_USERNAME/promptcast/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/YOUR_USERNAME/promptcast/discussions)
+- **Issues**: [GitHub Issues](https://github.com/RonKigen/promptcast-registry/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/RonKigen/promptcast-registry/discussions)
 - **Updates**: Watch the repo for selector updates
 
 ---

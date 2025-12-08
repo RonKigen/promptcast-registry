@@ -591,6 +591,33 @@ document.getElementById('flush-all-btn').addEventListener('click', async () => {
   }
 });
 
+document.getElementById('refresh-selectors-btn').addEventListener('click', async () => {
+  const btn = document.getElementById('refresh-selectors-btn');
+  btn.disabled = true;
+  btn.textContent = '⏳ Refreshing...';
+  
+  try {
+    // Clear cached selectors
+    await chrome.storage.local.remove(['selectors', 'selectors_timestamp', 'selectors_etag']);
+    
+    // Trigger background script to fetch new selectors
+    const response = await chrome.runtime.sendMessage({ action: 'getSelectors' });
+    
+    if (response && response.version) {
+      alert(`✅ Selectors updated to v${response.version}`);
+      await checkSelectorStatus();
+      await updatePrivacyAudit();
+    } else {
+      alert('⚠️ Failed to fetch selectors');
+    }
+  } catch (error) {
+    alert(`❌ Error: ${error.message}`);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '🔄 Refresh Selectors';
+  }
+});
+
 // ============================================================
 // SELECTOR STATUS CHECK
 // ============================================================

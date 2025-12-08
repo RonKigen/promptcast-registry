@@ -61,7 +61,7 @@ PromptCast is built on a **client-first, zero-backend** architecture. This isn't
 ### 1. GitHub Pages (Public Configuration Files)
 
 **What**: Selector definitions, feature flags, prompt templates  
-**URL**: `https://YOUR_USERNAME.github.io/promptcast-registry/`  
+**URL**: `https://ronkigen.github.io/promptcast-registry/`  
 **Frequency**: Every 6 hours (or on extension restart)  
 **Data Sent**: None (standard HTTP GET request)
 
@@ -74,7 +74,7 @@ PromptCast is built on a **client-first, zero-backend** architecture. This isn't
 **Example Request:**
 ```http
 GET /promptcast-registry/selectors-v1.json HTTP/1.1
-Host: YOUR_USERNAME.github.io
+Host: ronkigen.github.io
 If-None-Match: "abc123"  # etag for caching
 ```
 
@@ -211,7 +211,7 @@ Uninstall the extension. There's no persistent tracking.
 Our extension enforces strict CSP:
 ```json
 "content_security_policy": {
-  "extension_pages": "script-src 'self'; object-src 'self'; connect-src https://YOUR_USERNAME.github.io"
+  "extension_pages": "script-src 'self'; object-src 'self'; connect-src https://ronkigen.github.io"
 }
 ```
 
@@ -233,7 +233,7 @@ This prevents:
 
 ### No Obfuscation
 All code is readable JavaScript. No minification, no obfuscation.  
-**Audit it yourself**: https://github.com/YOUR_USERNAME/promptcast
+**Audit it yourself**: https://github.com/RonKigen/promptcast-registry
 
 ---
 
@@ -242,14 +242,14 @@ All code is readable JavaScript. No minification, no obfuscation.
 When we update this policy:
 1. "Last Updated" date will change
 2. Users will be notified via in-extension banner
-3. Old versions archived at: https://github.com/YOUR_USERNAME/promptcast/commits/main/PRIVACY.md
+3. Old versions archived at: https://github.com/RonKigen/promptcast-registry/commits/main/PRIVACY.md
 
 ---
 
 ## Contact
 
 **Questions about privacy?**
-- Open an issue: https://github.com/YOUR_USERNAME/promptcast/issues
+- Open an issue: https://github.com/RonKigen/promptcast-registry/issues
 - Email: privacy@yourdomain.com (if applicable)
 
 **Data Subject Requests (GDPR/CCPA):**
