@@ -70,18 +70,27 @@ function createDebugOverlay() {
     justify-content: space-between;
     align-items: center;
   `;
-  header.innerHTML = `
-    <span>🚀 PromptCast Debug</span>
-    <button onclick="this.parentElement.parentElement.remove()" style="
-      background: #EF4444;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      padding: 4px 8px;
-      cursor: pointer;
-      font-size: 11px;
-    ">Close</button>
+  
+  const title = document.createElement('span');
+  title.textContent = '🚀 PromptCast Debug';
+  
+  const closeBtn = document.createElement('button');
+  closeBtn.textContent = 'Close';
+  closeBtn.style.cssText = `
+    background: #EF4444;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 4px 8px;
+    cursor: pointer;
+    font-size: 11px;
   `;
+  closeBtn.addEventListener('click', () => {
+    overlay.remove();
+  });
+  
+  header.appendChild(title);
+  header.appendChild(closeBtn);
   
   overlay.appendChild(header);
   document.body.appendChild(overlay);

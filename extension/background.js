@@ -6,8 +6,8 @@ const CONFIG = {
   FLAGS_URL: 'https://ronkigen.github.io/promptcast-registry/public/flags.json',
   TELEMETRY_URL: 'https://promptcast-telemetry.pixora-ai.workers.dev/hit',
   SELECTORS_TTL: 6 * 60 * 60 * 1000, // 6 hours
-  TAB_IDLE_TIMEOUT: 5 * 60 * 1000, // 5 minutes
-  MAX_WARM_TABS: 2
+  TAB_IDLE_TIMEOUT: Infinity, // Never auto-close tabs - keep them for reuse
+  MAX_WARM_TABS: 100 // Track unlimited tabs
 };
 
 // Platform definitions
@@ -159,18 +159,34 @@ async function getOrCreateTab(platformId) {
     const pooled = tabPool.get(platformId);
     try {
       const tab = await chrome.tabs.get(pooled.tabId);
-      if (tab && tab.url.includes(PLATFORMS[platformId].url.split('/')[2])) {
+      
+      // Verify tab still exists and is on the right domain
+      const platformDomain = PLATFORMS[platformId].url.split('/')[2];
+      if (tab && tab.url && tab.url.includes(platformDomain)) {
+        // Tab is valid - reuse it
+        console.log(`[PromptCast] Reusing existing tab for ${platformId}: ${tab.id}`);
+        
         // Update last used timestamp
         tabPool.set(platformId, { ...pooled, lastUsed: Date.now() });
+        
+        // Bring tab to front (optional - make it active)
+        await chrome.tabs.update(tab.id, { active: true });
+        
         return tab.id;
+      } else {
+        // Tab navigated away - remove from pool
+        console.log(`[PromptCast] Tab navigated away from ${platformId}, creating new tab`);
+        tabPool.delete(platformId);
       }
     } catch (error) {
-      // Tab no longer exists
+      // Tab no longer exists - remove from pool
+      console.log(`[PromptCast] Tab closed for ${platformId}, creating new tab`);
       tabPool.delete(platformId);
     }
   }
 
   // Create new tab
+  console.log(`[PromptCast] Creating new tab for ${platformId}`);
   const tab = await chrome.tabs.create({
     url: PLATFORMS[platformId].url,
     active: false
@@ -186,24 +202,24 @@ async function getOrCreateTab(platformId) {
 }
 
 async function garbageCollectTabs() {
-  const now = Date.now();
+  // Only remove closed tabs from tracking - don't auto-close them
   const tabsToRemove = [];
 
   for (const [platformId, pooled] of tabPool.entries()) {
-    if (now - pooled.lastUsed > CONFIG.TAB_IDLE_TIMEOUT) {
+    try {
+      await chrome.tabs.get(pooled.tabId);
+      // Tab exists - keep it in pool
+    } catch (error) {
+      // Tab was manually closed by user - remove from tracking
+      console.log(`[PromptCast] Removing closed tab from pool: ${platformId}`);
       tabsToRemove.push(platformId);
-      try {
-        await chrome.tabs.remove(pooled.tabId);
-      } catch (error) {
-        // Tab already closed
-      }
     }
   }
 
   tabsToRemove.forEach(id => tabPool.delete(id));
   
   if (tabsToRemove.length > 0) {
-    console.log(`[PromptCast] Cleaned up ${tabsToRemove.length} idle tabs`);
+    console.log(`[PromptCast] Cleaned up ${tabsToRemove.length} closed tabs from tracking`);
   }
 }
 
@@ -418,6 +434,21 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
     await launchAndInject(defaultPlatforms, prompt, {
       source: 'page-summary'
     });
+  }
+});
+
+// ============================================================
+// TAB LIFECYCLE LISTENERS: Track when users close tabs
+// ============================================================
+
+chrome.tabs.onRemoved.addListener((tabId) => {
+  // Remove closed tabs from pool immediately
+  for (const [platformId, pooled] of tabPool.entries()) {
+    if (pooled.tabId === tabId) {
+      console.log(`[PromptCast] Tab closed by user: ${platformId} (${tabId})`);
+      tabPool.delete(platformId);
+      break;
+    }
   }
 });
 
